@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://jdcb.codeplex.com/RequestDef.xsd" xmlns="http://jdcb.codeplex.com/RequestDef.xsd"
+          >
+  <xs:element name="root">
+
+    <xs:complexType>
+
+      <xs:choice>
+        <xs:element minOccurs="0" name="PostRequest" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string" >
+              </xs:element>
+              <xs:element  maxOccurs="1" name="URLTemplate" type="TemplateValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Query" type="ValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Header" type="ValueSet">
+              </xs:element>
+
+              <xs:element minOccurs="0" maxOccurs="1" name="Post" type="ValueSet">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="MultiPartPostRequest">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="Comment"  type="xs:string">
+              </xs:element>
+              <xs:element maxOccurs="1" name="URLTemplate" type="TemplateValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Query" type="ValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Header" type="ValueSet">
+              </xs:element>
+
+              <xs:element minOccurs="0" maxOccurs="1" name="Post" type="ValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="File" type="ValueSetForceSingle">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="GetRequest">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string">
+              </xs:element>
+              <xs:element maxOccurs="1" name="URLTemplate" type="TemplateValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Query" type="ValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Header" type="ValueSet">
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="DeleteRequest">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string">
+              </xs:element>
+              <xs:element maxOccurs="1" name="URLTemplate" type="TemplateValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Query" type="ValueSet">
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="1" name="Header" type="ValueSet">
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="param" mixed="true" >
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string">
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="type" type="paramType" use="required"  />
+    <xs:attribute name="key" type="xs:string" use="required" />
+
+  </xs:complexType>
+  <xs:complexType name="paramForceSingle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string">
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="type" type="paramTypeForceSingle" use="required"  />
+    <xs:attribute name="key" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Template">
+    <xs:attribute name="url" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ValueSet">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="param" type="param">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+  <xs:complexType name="ValueSetForceSingle">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="param" type="paramForceSingle">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateValueSet">
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="Template" type="Template">
+      </xs:element>
+      <xs:element maxOccurs="unbounded"  minOccurs="0" name="param" type="paramForceSingle">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="paramType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="List" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="paramTypeForceSingle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

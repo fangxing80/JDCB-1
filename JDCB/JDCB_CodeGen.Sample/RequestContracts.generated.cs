@@ -188,6 +188,33 @@ namespace SinaWeiboTest
 				
 								
 
+	/// <summary>1
+	/// Sample
+	/// </summary>
+	public partial class TestGetRequest : GetRequest, INotifyPropertyChanged
+	{
+		public TestGetRequest()
+		{
+		}
+
+		public event PropertyChangedEventHandler  PropertyChanged ;
+
+		/// <summary>1
+		/// </summary>
+		public string Action
+		{ 
+			get { return RequestData.UrlTemplateValues.ContainsKey("action") ? RequestData.UrlTemplateValues["action"] : null; }
+			set
+			{
+				RequestData.UrlTemplateValues["action"] = value;
+				if( PropertyChanged !=null )PropertyChanged(this , new PropertyChangedEventArgs("Action"));
+			}
+		}
+	}
+
+				
+								
+
 	namespace Account
 	{
 		/// <summary>1

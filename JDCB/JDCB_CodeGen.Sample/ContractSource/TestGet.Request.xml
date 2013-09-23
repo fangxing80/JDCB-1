@@ -1,0 +1,10 @@
+﻿<?xml  version="1.0"?>
+<root xmlns="http://jdcb.codeplex.com/RequestDef.xsd">
+  <GetRequest>
+    <Comment>Sample</Comment>
+    <URLTemplate >
+      <Template url="http://xxxx.com/{action}"/>
+      <param key ="action" type ="Single"/>
+    </URLTemplate>
+  </GetRequest>
+</root>

@@ -45,8 +45,10 @@
   <ItemGroup>
     <None Include="BuildPublishPackage.cmd" />
     <None Include="JDCB.nuspec" />
-    <None Include="laucher.cmd" />
     <None Include="tools\install.ps1" />
+    <None Include="tools\RequestDef.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\" />
@@ -71,11 +73,17 @@
     <Content Include="tools\SLDllsForT4\System.Xml.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="laucher.cmd" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tools\RequestDef.cs">
+      <DependentUpon>RequestDef.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
+
+
 laucher</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

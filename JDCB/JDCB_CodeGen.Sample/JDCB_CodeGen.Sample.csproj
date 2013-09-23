@@ -118,6 +118,7 @@
     <None Include="ContractSource\tags\create.Response.json" />
     <None Include="ContractSource\tags\destory_batch.Response.json" />
     <None Include="ContractSource\tags\suggestions.Response.json" />
+    <None Include="ContractSource\TestGet.Response.json" />
     <None Include="ContractSource\trends\destory.Response.json" />
     <None Include="ContractSource\trends\follow.Response.json" />
     <None Include="ContractSource\trends\statuses.Response.json" />
@@ -193,6 +194,7 @@
     <Content Include="ContractSource\tags\destroy_batch.Request.xml" />
     <Content Include="ContractSource\tags\suggestions.Request.xml" />
     <Content Include="ContractSource\tags\tags.Request.xml" />
+    <Content Include="ContractSource\TestGet.Request.xml" />
     <Content Include="ContractSource\trends\daily.Request.xml" />
     <Content Include="ContractSource\trends\destroy.Request.xml" />
     <Content Include="ContractSource\trends\follow.Request.xml" />

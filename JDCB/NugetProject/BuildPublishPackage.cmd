@@ -15,11 +15,12 @@ IF EXIST *.nupkg (
 
 echo.
 echo Updating NuGet...
-cmd /c nuget.exe update -Self
+rem cmd /c nuget.exe update -Self
 
 echo.
 echo Creating package...
-nuget.exe pack JDCB.nuspec -Verbose -Version %1
+echo %1
+ nuget.exe pack JDCB.nuspec -Verbose -Version %1
 
 :: Check if package should be published
 IF /I "%2"=="Publish" goto :publish
@@ -31,7 +32,7 @@ IF EXIST *.nupkg (
 	echo Publishing package...
 	echo API Key: %key%
 	echo NuGet Url: %url%
-	forfiles /m *.nupkg /c "cmd /c nuget.exe push @File %key% -Source %url%"
+	forfiles /m *.nupkg /c "cmd /c nuget.exe push @File %key% -Source %url%" 
 	goto :eof
 )
 

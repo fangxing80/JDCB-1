@@ -1007,6 +1007,28 @@ namespace SinaWeiboTest
 	}
 
 				
+				//ns
+	[DataContract]
+	public partial class TestGetResponse: INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler  PropertyChanged ;
+
+		string _Text;
+		[DataMember(Name = "Text")]
+		public string Text
+		{ 
+			get { return _Text;} 
+			set 
+			{ 
+				_Text = value;
+				if ( this.PropertyChanged != null )
+					this.PropertyChanged (this,new PropertyChangedEventArgs ("Text"));
+			}
+		}
+
+	}
+
+				
 				//nsAccount
 	namespace Account
 	{

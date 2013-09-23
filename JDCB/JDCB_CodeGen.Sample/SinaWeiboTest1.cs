@@ -27,6 +27,8 @@ namespace SinaWeiboTest
 						
 			_executeFavoritesMethod= new JsonMethod<FavoritesRequest, FavoritesResponse>(this, new Uri("favorites.json", UriKind.Relative));
 						
+			_executeTestGetMethod= new JsonMethod<TestGetRequest, TestGetResponse>(this, new Uri("http://xxxx.com/{action}", UriKind.Relative));
+						
 			_executeAccountGetPrivacyMethod= new JsonMethod<Account.GetPrivacyRequest, Account.GetPrivacyResponse>(this, new Uri("account/get_privacy.json", UriKind.Relative));
 						
 			_executeAccountRateLimitStatusMethod= new JsonMethod<Account.RateLimitStatusRequest, Account.RateLimitStatusResponse>(this, new Uri("account/rate_limit_status.json", UriKind.Relative));
@@ -133,6 +135,8 @@ namespace SinaWeiboTest
 			_requestEmotionsMethod= new JsonMethod<EmotionsRequest, Stream>(this, new Uri("emotions.json", UriKind.Relative));
 						
 			_requestFavoritesMethod= new JsonMethod<FavoritesRequest, Stream>(this, new Uri("favorites.json", UriKind.Relative));
+						
+			_requestTestGetMethod= new JsonMethod<TestGetRequest, Stream>(this, new Uri("http://xxxx.com/{action}", UriKind.Relative));
 						
 			_requestAccountGetPrivacyMethod= new JsonMethod<Account.GetPrivacyRequest, Stream>(this, new Uri("account/get_privacy.json", UriKind.Relative));
 						
@@ -376,6 +380,39 @@ namespace SinaWeiboTest
 		public JsonResponse<FavoritesResponse> ExecuteFavorites(FavoritesRequest request)
 		{
 			return ExecuteFavoritesAsync(request).Result;
+		}
+		
+		
+				
+		/// <summary>
+		/// Path\TestGet
+		/// </summary>
+		JsonMethod<TestGetRequest, TestGetResponse> _executeTestGetMethod;
+		
+		/// <summary>
+		/// This is a async execution of \TestGet rest call. 
+		/// It returns JsonResponse&lt;TestGetResponse&gt;
+		/// Here comes request Comments:
+		///Sample
+		/// </summary>
+		public async Task<JsonResponse<TestGetResponse>> ExecuteTestGetAsync (
+			TestGetRequest request,
+			CancellationToken cancellationToken =default(CancellationToken),
+			IProgress<ProgressReport> progress=null 
+			)			
+		{
+			return await _executeTestGetMethod.GetResponseAsync(request, cancellationToken, progress);
+		}
+		
+		/// <summary>
+		/// This is a sync execution of \TestGet rest call. 
+		/// It returns JsonResponse&lt;TestGetResponse&gt;
+		/// Here comes request Comments:
+		///Sample
+		/// </summary>
+		public JsonResponse<TestGetResponse> ExecuteTestGet(TestGetRequest request)
+		{
+			return ExecuteTestGetAsync(request).Result;
 		}
 		
 		
@@ -3304,6 +3341,33 @@ namespace SinaWeiboTest
 		public JsonResponse<Stream> RequestFavorites(FavoritesRequest request)
 		{
 			return RequestFavoritesAsync(request).Result;
+		}
+		
+				
+		JsonMethod<TestGetRequest, Stream> _requestTestGetMethod;
+		/// <summary>
+		/// This is a async request of \TestGet rest call. 
+		///It returns JsonResponse&lt;Stream&gt;
+		/// Here comes request Comments:
+		///Sample
+		/// </summary>
+		public async Task<JsonResponse<Stream>> RequestTestGetAsync (
+			TestGetRequest request,
+			CancellationToken cancellationToken =default(CancellationToken),
+			IProgress<ProgressReport> progress=null 
+			)			
+		{
+			return await _requestTestGetMethod.GetResponseAsync(request, cancellationToken, progress);
+		}
+		/// <summary>
+		/// This is a sync request of \TestGet rest call.
+		///It returns JsonResponse&lt;Stream&gt;
+		/// Here comes request Comments:
+		///Sample
+		/// </summary>
+		public JsonResponse<Stream> RequestTestGet(TestGetRequest request)
+		{
+			return RequestTestGetAsync(request).Result;
 		}
 		
 				
