@@ -7,8 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+#if NETFX_CORE
 using System.Net.Http;
-
+#endif
 namespace OAuthLib
 {
     public enum GrantType
@@ -50,13 +51,16 @@ namespace OAuthLib
         /// <returns></returns>
         public async Task<OAuthAccessToken> LoginAsync(string passport, string password, CancellationToken cancelToken)
         {
+#if !WINDOWS_PHONE_8
             ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
             {
                 return true;
             };
+#endif
             var request = WebRequest.Create(Settings.AuthorizeUrl) as HttpWebRequest;
 
-            request.Referer = GetAuthorizeUrl();
+            //request.Referer = GetAuthorizeUrl();
+            request.Headers[HttpRequestHeader.Referer] = GetAuthorizeUrl();
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.CookieContainer = new CookieContainer();
@@ -95,7 +99,7 @@ namespace OAuthLib
                 using (var request = new HttpRequestMessage(HttpMethod.Post, Settings.AuthorizeUrl))
                 {
                     var referrer = GetAuthorizeUrl();
-                    request.Headers.Referrer = new Uri(referrer);
+                    request.Headers[HttpRequestHeader.Referer] = new Uri(referrer);
 
                     var postBody = GetSimulateLoginPostBody(passport, password);
                     request.Content = new StringContent(postBody);
